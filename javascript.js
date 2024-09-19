@@ -81,11 +81,13 @@ function playRound(humanChoice, computerChoice) {
 
 
 
+
+
 function playGame(pcChoice, humanChoicce, game) {
     for (i = 0; i < 5; i++) {
-        pcChoice();
-        humanChoicce();
-        game();
+        const computerSelection = pcChoice();
+        const humanSelection = humanChoicce();
+        game(humanSelection, computerSelection);
     }
 }
 
