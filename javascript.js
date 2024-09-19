@@ -79,19 +79,15 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
 
-playRound(humanSelection, computerSelection);
 
-function playGame(game) {
+function playGame(pcChoice, humanChoicce, game) {
     for (i = 0; i < 5; i++) {
-        game;
+        pcChoice();
+        humanChoicce();
+        game();
     }
 }
 
 
-
-const play = playRound();
-
-playGame(play);
+playGame(getComputerChoice, getHumanChoice, playRound);
