@@ -1,12 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>rock_paper_scissors</title>
-    <script src="javascript.js"></script>
+  <title>Rock Paper Scissors</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+    }
+
+    button {
+      margin: 10px;
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4CAF50; 
+      color: white;
+      cursor: pointer;
+    }
+
+    #results {
+      margin-top: 20px;
+      font-size: 20px;
+    }
+  </style>
 </head>
 <body>
-    
+  <h1>Rock Paper Scissors</h1>
+
+  <div>
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
+  </div>
+
+  <div id="results"></div>
+
+  <script>
+    let humanScore = 0;
+    let computerScore = 0;
+
+    const resultsDiv = document.getElementById("results");
+
+    function getComputerChoice() {
+      let random = Math.floor(Math.random() * 3);
+      if (random === 0) {
+        return "rock";
+      } else if (random === 1) {
+        return "paper";
+      } else {
+        return "scissors";
+      }
+    }
+
+    function playRound(humanChoice) {
+      const computerChoice = getComputerChoice();
+      let result = "";
+
+      if (humanChoice === computerChoice) {
+        result = "It's a tie!";
+      } else if (
+        (humanChoice === "rock" && computerChoice === "scissors") ||
+        (humanChoice === "paper" && computerChoice === "rock") ||
+        (humanChoice === "scissors" && computerChoice === "paper")
+      ) {
+        result = `You win! ${humanChoice} beats ${computerChoice}.`;
+        humanScore++;
+      } else {
+        result = `You lose! ${computerChoice} beats ${humanChoice}.`;
+        computerScore++;
+      }
+
+      updateResults(result);
+      checkWinner();
+    }
+
+    function updateResults(roundResult) {
+      resultsDiv.innerHTML = `
+        <p>${roundResult}</p>
+        <p>Human: ${humanScore}  Computer: ${computerScore}</p>
+      `;
+    }
+
+    function checkWinner() {
+      if (humanScore >= 5) {
+        resultsDiv.innerHTML += "<p>You win the game!</p>";
+        disableButtons();
+      } else if (computerScore >= 5) {
+        resultsDiv.innerHTML += "<p>Computer wins the game!</p>";
+        disableButtons();
+      }
+    }
+
+    function disableButtons() {
+      document.getElementById("rock").disabled = true;
+      document.getElementById("paper").disabled = true;
+      document.getElementById("scissors").disabled = true;
+    }
+
+    document.getElementById("rock").addEventListener("click", () => {
+      playRound("rock");
+    });
+
+    document.getElementById("paper").addEventListener("click", () => {
+      playRound("paper");
+    });
+
+    document.getElementById("scissors").addEventListener("click", () => {
+      playRound("scissors");
+    });
+  </script>
 </body>
 </html>
