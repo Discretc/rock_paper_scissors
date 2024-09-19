@@ -81,7 +81,7 @@ function playRound(humanChoice, computerChoice) {
 
 
 
-
+// this is a comment
 
 function playGame(pcChoice, humanChoicce, game) {
     for (i = 0; i < 5; i++) {
